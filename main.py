@@ -216,7 +216,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name="with Python 3.6.1"))
+    await client.change_presence(game=discord.Game(name="with Python 3.6.7"))
 
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")

@@ -122,7 +122,8 @@ async def on_message(message):
             lowkay = []
             for i in range(len(lines)):
                 item = lines[i]
-                price = int(item.split('Price: ')[1].split(' Credits')[0])
+                price = int(''.join((item.split('Price: ')\
+                                     [1].split(' Credits')[0]).split(',')))
                 poke_id = item.split('ID: ')[1].split(' |')[0]
                 if price < 8:
                     okay.append(poke_id)
@@ -139,21 +140,22 @@ async def on_message(message):
         # START OF P!POKEMON --NAME
 
         if desc.startswith('**'):
-            emolgas = []
+            pokayman = []
             desc = desc.split('Number: ')
             for i in desc:
                 i = i.split(' | IV')[0]
-                emolgas.append(i)
-            emolgas = emolgas[1:]
-            msg = ('p`!`p add '+' '.join(emolgas)).format(message)
-            if len(emolgas) > 0:
+                pokayman.append(i)
+            pokayman = pokayman[1:]
+            msg = ('p`!`p add '+' '.join(pokayman)).format(message)
+            if len(pokayman) > 0:
             	await client.send_message(message.channel, msg)
             return
 
         # END OF P!POKEMON --NAME         
     # START OF P!SEARCH
 
-    if message.content.startswith('!pokemon') or message.content.startswith('p!search'):
+    if message.content.startswith('!pokemon') or \
+       message.content.startswith('p!search'):
         pokemon = message.content.split(' ')[1]
         url = 'https://www.google.com/search?q=pokedex+'+pokemon
         text = goggle_search(url)
@@ -183,14 +185,14 @@ async def on_message(message):
     # START OF !DETAILS
 
     if message.content.lower() == '!details':
-        em = discord.Embed(title='read my code!', url='https://github.com/TCReaper/Reaper.py/', colour=0xb949b5)
+        em = discord.Embed(title='read my code!', url='https://omfgdogs.com/', colour=0xb949b5)
         em = em.set_author(name='TCReaper')
         await client.send_message(message.channel,embed=em)
 
     # END OF !DETAILS
 
     if message.content.lower() == 'mkt':
-    	msg = 'p!market search --order price a --showiv --name '.format(message)
+    	msg = '```css\np!market search --order price a --showiv --name ```'.format(message)
     	await client.send_message(message.channel,msg)
 
     if message.content.lower().startswith('test'):
@@ -216,7 +218,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name="with Python 3.6.7"))
+    await client.change_presence(game=discord.Game(name="with Python 3.6.8"))
 
 keep_alive()
 token = os.environ.get("DISCORD_BOT_SECRET")

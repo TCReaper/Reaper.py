@@ -1,4 +1,5 @@
 import urllib.request
+from bs4 import BeautifulSoup as BS
 
 def goggle_search(url):
     req = urllib.request.Request(
@@ -21,3 +22,17 @@ def goggle_search(url):
     file.close()
 
     return text
+
+
+
+def goggle_search_2(url):
+    html = urllib.urlopen(URL).read()
+
+    soup = BS(html)
+    
+    file = open('searchResults.txt','w')
+    
+    file.write(url+'\n\n\n'+str(soup.findAll(tag_name).get_text()))
+    
+    file.close()
+    
